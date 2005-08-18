@@ -1,0 +1,19 @@
+Introduction
+
+This driver has been tested for the 3com 3c905B chipset only: namely "pci10b7,9055". 
+
+To compile this driver, execute compile.sh after placing "/usr/sfw/bin" and "/usr/ccs/bin" in your path.
+
+I have only tested this on AMD64, but the driver is stable and suffices for day to day usage. (For me at least).
+
+DHCP et al works fine. 
+
+Driver Installation
+
+1. After compiling the driver, copy sol_xl to "/kernel/drv/" for IA32 users, "/kernel/drv/amd64/" for AMD64 users. (To compile for IA32, refer to compile.sh. By default it compiles for AMD64)
+2. Remove the elxl driver from the driver alias list by "rem_drv elxl"
+3. If you were previously running the elxl driver, and have rem_drv it, you must reboot for it to relinquish it's hold over the pci card
+3. Add the sol_xl driver via "add_drv -i '"pci10b7,9055"' sol_xl"
+4. Plumb the device via "ifconfig sol_xl0 plumb"
+5. Do your static ip assignment or DHCP assignment as usual.
+
